@@ -1,5 +1,4 @@
 .idea
 node_modules
 config.js
-userdata/posts.array
-userdata/planet.list
+userdata/
