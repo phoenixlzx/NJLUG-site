@@ -1,0 +1,7 @@
+# feed sites list
+# format: name|url
+# lines start with '#' and empty lines will be ignored.
+李凡希|http://www.freemindworld.com/blog/feed
+张志博|http://www.zhangzhibo.net/feed/
+王宇希|http://jaseywang.me/feed
+Phoenix Nemo|http://blog.phoenixlzx.com/atom.xml

@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <!-- <link rel="shortcut icon" href=""> -->
+    <title><%= title %></title>
+    <link href="/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/css/style.css" rel="stylesheet">
+
+    <link rel="stylesheet" href="/css/hljs_style.css">
+    <script src="/js/highlight.min.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+    <script src="/js/html5shiv.js"></script>
+    <script src="/js/respond.min.js"></script>
+    <![endif]-->
+</head>
+
+<body>
+
+<div class="blog-masthead">
+    <div class="container">
+        <nav class="blog-nav">
+            <a class="blog-nav-item" href="/">Home</a>
+            <a class="blog-nav-item active" href="">Planet</a>
+            <a class="blog-nav-item" href="http://wiki.nanjinglug.org">Wiki</a>
+            <a class="blog-nav-item" href="/about">About</a>
+        </nav>
+    </div>
+</div>
+
+<div class="container">
+
+    <div class="blog-header">
+        <h1 class="blog-title"><%= siteName %></h1>
+        <p class="lead blog-description"><%= tagLine %></p>
+    </div>
+
+    <div class="row">
+
+        <div class="col-sm-12 blog-main">
+
+            <% posts.forEach(function(post) { %>
+            <div class="blog-post">
+                <h2 class="blog-post-title"><a href="<%= post.link %>"><%= post.title %></a></h2>
+                <p class="blog-post-meta">
+                    <%
+                        var fulltime = new Date(post.time);
+                        var time = fulltime.getFullYear() + '-'
+                            + (fulltime.getMonth() + 1) + '-'
+                            + fulltime.getDate() + ' '
+                            + fulltime.getHours() + ':' +
+                            +fulltime.getMinutes();
+                    %>
+                    <%= time %>
+                    by <%= post.author %>
+                </p>
+                <%- post.content %>
+            </div><!-- /.blog-post -->
+            <% }) %>
+
+        </div><!-- /.blog-main -->
+
+    </div><!-- /.row -->
+
+</div><!-- /.container -->
+
+<div class="blog-footer">
+    <p><%= title %></p>
+    <p>
+        <a href="#">Back to top</a>
+    </p>
+</div>
+
+
+<!-- Bootstrap core JavaScript
+================================================== -->
+<!-- Placed at the end of the document so the pages load faster -->
+<script src="/js/jquery-2.1.1.min.js"></script>
+<script src="/js/bootstrap.min.js"></script>
+</body>
+</html>
