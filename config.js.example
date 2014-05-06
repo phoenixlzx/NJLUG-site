@@ -1,0 +1,13 @@
+module.exports = {
+    // http server settings
+    bindAddress: '127.0.0.1',
+    bindPort: 3000,
+
+    // site settings
+    siteName: '南京 Linux 用户组',
+    tagline: 'See U on the Second Sunday of Every Month!',
+    title: 'Nanjing Linux User Group | 建一个友好的 Linux 本地社区',
+
+    // planet feed fetch interval in seconds.
+    feedInterval: 3600
+};
