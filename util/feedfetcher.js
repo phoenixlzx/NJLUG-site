@@ -117,7 +117,7 @@ function fetch(feed, callback) {
         var post;
         while (post = this.read()) {
             posts.push({
-                time: post.date,
+                time: post.pubDate,
                 author: post.author,
                 link: post.link,
                 title: post.title,
