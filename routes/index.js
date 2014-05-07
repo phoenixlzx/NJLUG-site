@@ -61,6 +61,11 @@ router.get('/planet', function(req, res) {
             fs.readFile('./userdata/posts.array', 'utf8', function(err, posts) {
                 // parse array string to arrayt object.
                 posts = JSON.parse(posts);
+
+                // remove some items to save browser ram.
+                if (posts.length > config.feeditem) {
+                    posts = posts.splice(0, config.feeditem);
+                }
                 res.render('planet', {
                     siteName: config.siteName,
                     title: config.title,

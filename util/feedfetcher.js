@@ -36,9 +36,12 @@ function update() {
             async.eachSeries(feeds, function(feed, callback) {
                 console.log('updating ' + feed);
                 fetch(feed, function(err) {
+                    /*
                     if (err) {
                         return callback(err);
                     }
+                    */
+                    // should we just ignore the error and continue?
                     callback();
                 });
             }, function(err) {

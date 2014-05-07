@@ -9,5 +9,6 @@ module.exports = {
     title: 'Nanjing Linux User Group | 建一个友好的 Linux 本地社区',
 
     // planet feed fetch interval in seconds.
-    feedInterval: 3600
+    feedInterval: 3600,
+    feeditem: 50
 };
