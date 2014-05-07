@@ -6,6 +6,7 @@ var fs = require('fs');
 var config = require('../config');
 
 var posts = [];
+var fetchlock = false;
 
 var fetcher = setInterval(update, config.feedInterval * 1000);
 
@@ -16,7 +17,13 @@ function update() {
         if (err) {
             return err;
         }
+        if (fetchlock) {
+            return;
+        }
         var feeds = [];
+
+        // lock fetch process.
+        fetchlock = true;
         var personalLinks = list.split("\n");
         async.eachSeries(personalLinks, function(personalLink, callback) {
             // console.log(personalLink.split("|")[1]);
@@ -50,11 +57,14 @@ function update() {
                 }
                 fs.writeFile('./userdata/posts.array',
                     JSON.stringify(posts.sort(function(a, b) {
-                            return new Date(b.time).getTime() - new Date(a.time).getTime()
-                        })), function (err) {
-                    // console.log(posts);
-                    return err;
-                });
+                        return new Date(b.time).getTime() - new Date(a.time).getTime()
+                    })), function (err) {
+                        // console.log(posts);
+                        // unlock fetch process and restore posts variable.
+                        fetchlock = false;
+                        posts = [];
+                        return err;
+                    });
             });
         });
     });
