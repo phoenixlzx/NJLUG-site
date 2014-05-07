@@ -66,7 +66,7 @@ router.get('/planet', function(req, res) {
                     siteName: config.siteName,
                     title: config.title,
                     tagLine: config.tagline,
-                    posts: posts.sort(function(a, b) {return new Date(b.time).getTime() - new Date(a.time).getTime()}),
+                    posts: posts,
                     widget: widget_content
                 })
             });

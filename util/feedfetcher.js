@@ -47,7 +47,10 @@ function update(cb) {
                 if (err) {
                     return cb(err);
                 }
-                fs.writeFile('./userdata/posts.array', JSON.stringify(posts), function (err) {
+                fs.writeFile('./userdata/posts.array',
+                    JSON.stringify(posts.sort(function(a, b) {
+                            return new Date(b.time).getTime() - new Date(a.time).getTime()
+                        })), function (err) {
                     // console.log(posts);
                     cb(err);
                 });
