@@ -3,3 +3,4 @@ node_modules
 config.js
 **/userdata/planet.list
 **/userdata/posts.array
+**/userdata/pages/*.md
