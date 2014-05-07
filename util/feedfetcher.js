@@ -7,24 +7,21 @@ var config = require('../config');
 
 var posts = [];
 
-setInterval(update(function(err) {
-    if (err) {
-        console.log(err);
-    }
-}), config.feedInterval * 1000);
+var fetcher = setInterval(update, config.feedInterval * 1000);
 
-function update(cb) {
+function update() {
     // read feed list from planet.list
     // console.log('updating posts...');
     fs.readFile('./userdata/planet.list', 'utf8', function (err, list) {
         if (err) {
-            return cb(err);
+            return err;
         }
         var feeds = [];
         var personalLinks = list.split("\n");
         async.eachSeries(personalLinks, function(personalLink, callback) {
             // console.log(personalLink.split("|")[1]);
             if (personalLink.indexOf("#") === 0 || (!personalLink)) {
+                // console.log(personalLink);
                 // ignore comment and empty lines.
                 callback();
             } else {
@@ -33,10 +30,11 @@ function update(cb) {
             }
         }, function(err) {
             if (err) {
-                return cb(err);
+                return err;
             }
             // get all user feeds.
             async.eachSeries(feeds, function(feed, callback) {
+                console.log('updating ' + feed);
                 fetch(feed, function(err) {
                     if (err) {
                         return callback(err);
@@ -45,14 +43,14 @@ function update(cb) {
                 });
             }, function(err) {
                 if (err) {
-                    return cb(err);
+                    return err;
                 }
                 fs.writeFile('./userdata/posts.array',
                     JSON.stringify(posts.sort(function(a, b) {
                             return new Date(b.time).getTime() - new Date(a.time).getTime()
                         })), function (err) {
                     // console.log(posts);
-                    cb(err);
+                    return err;
                 });
             });
         });

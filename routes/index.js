@@ -3,6 +3,7 @@ var router = express.Router();
 
 var marked = require('marked');
 var fs = require('fs');
+var async = require('async');
 
 var config = require('../config');
 
@@ -54,10 +55,8 @@ router.get('/planet', function(req, res) {
     fs.exists('./userdata/posts.array', function (exists) {
         if (!exists) {
             // posts array does not exist, create now.
-            update.update(function(err) {
-                if (err) throw err;
-                console.log('Posts data updated.\n');
-            });
+            update.update();
+            res.send(200, 'Please wait while updating posts feed.');
         } else {
             fs.readFile('./userdata/posts.array', 'utf8', function(err, posts) {
                 // parse array string to arrayt object.
